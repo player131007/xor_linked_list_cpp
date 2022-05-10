@@ -40,13 +40,13 @@ public:
 
 	constexpr xor_list_iterator& operator++() {
 		node *tmp = curr;
-		curr = reinterpret_cast<node*>(get_xor_of_nodes<node>(curr->both,prev));
+		curr = reinterpret_cast<node*>(get_xor(curr->both,prev));
 		prev = tmp;
 		return *this;
 	}
 	constexpr xor_list_iterator& operator--() {
 		node *tmp = prev;
-		prev = reinterpret_cast<node*>(get_xor_of_nodes<node>(prev->both, curr));
+		prev = reinterpret_cast<node*>(get_xor(prev->both, curr));
 		curr = tmp;
 		return *this;
 	}

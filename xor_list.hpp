@@ -25,7 +25,7 @@ public:
 			_begin.curr = _end.prev = new_node;
 		} else {
 			new_node->both = reinterpret_cast<uintptr_t>(_end.prev);
-			_end.prev->both = get_xor_of_nodes<node>(_end.prev->both,new_node);
+			_end.prev->both = get_xor(_end.prev->both,new_node);
 			_end.prev = new_node;
 		}
 	}
