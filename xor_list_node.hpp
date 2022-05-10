@@ -24,22 +24,6 @@ namespace detail {
 	concept numerical = is_numerical<T>;
 }
 
-template<typename T>
-struct xor_list_node {
-	using value_type = T;
-
-	value_type value;
-	uintptr_t both;
-
-	constexpr xor_list_node(const value_type &value, uintptr_t both = 0) : value(value), both(both) {}
-	constexpr xor_list_node(value_type &&value, uintptr_t both = 0) : value(std::move(value)), both(both) {}
-
-	friend constexpr void swap(xor_list_node *&a, xor_list_node *&b) {
-		auto tmp = a;
-		a = b;
-		b = tmp;
-	}
-};
 
 #if __cplusplus >= 201703L
 
@@ -75,3 +59,20 @@ constexpr std::enable_if<sizeof...(Tail)==0,uint64_t>::type get_xor(Head head, T
 #endif
 
 #endif
+
+template<typename T>
+struct xor_list_node {
+	using value_type = T;
+
+	value_type value;
+	uintptr_t both;
+
+	constexpr xor_list_node(const value_type &value, uintptr_t both = 0) : value(value), both(both) {}
+	constexpr xor_list_node(value_type &&value, uintptr_t both = 0) : value(std::move(value)), both(both) {}
+
+	friend constexpr void swap(xor_list_node *&a, xor_list_node *&b) {
+		auto tmp = a;
+		a = b;
+		b = tmp;
+	}
+};
