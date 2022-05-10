@@ -16,7 +16,7 @@ public:
 	using node = xor_list_node<T>;
 	using iterator = xor_list_iterator<T>;
 	using reverse_iterator = iterator;
-	using const_iterator = iterator;
+	using const_iterator = xor_list_const_iterator<T>;
 	
 	constexpr xor_list() : _begin(), _end() {}
 	constexpr void push_back(const T& value) {
@@ -40,6 +40,8 @@ public:
 	constexpr iterator end() { return _end; }
 	constexpr reverse_iterator rbegin() { return reverse_iterator(_end.curr,_end.prev); }
 	constexpr reverse_iterator rend() { return reverse_iterator(_begin.curr,_begin.prev); }
+	constexpr const_iterator cbegin() { return const_iterator(_begin.prev,_begin.curr); }
+	constexpr const_iterator cend() { return const_iterator(_end.prev,_end.curr); }
 
 
 	constexpr xor_list<T>& reverse() {
