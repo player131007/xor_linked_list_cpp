@@ -58,7 +58,6 @@ constexpr std::enable_if<sizeof...(Tail)==0,uint64_t>::type get_xor(Head head, T
 }
 #endif
 
-#endif
 
 template<typename T>
 struct xor_list_node {
@@ -76,3 +75,5 @@ struct xor_list_node {
 		b = tmp;
 	}
 };
+
+#endif
