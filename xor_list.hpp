@@ -6,6 +6,7 @@
 
 
 //TODO: add STL-like functions
+//TODO: add exception guarantee
 
 template<typename T>
 class xor_list {
