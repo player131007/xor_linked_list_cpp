@@ -20,14 +20,14 @@ public:
 	
 	constexpr xor_list() : _begin(), _end() {}
 	constexpr void push_back(const T& value) {
-		node *new_node = new node(value);
-		if(!_begin) {
-			_begin.curr = _end.prev = new_node;
-		} else {
-			new_node->both = reinterpret_cast<uintptr_t>(_end.prev);
-			_end.prev->both = get_xor(_end.prev->both,new_node);
-			_end.prev = new_node;
-		}
+		insert(_end,value);
+	}
+
+	constexpr iterator insert(const_iterator pos,const T& value) {
+		return insert_by_node(pos,new node(value));
+	}
+	constexpr iterator insert(const_iterator pos,T&& value) {
+		return insert_by_node(pos,new node(std::move(value)));
 	}
 
 	constexpr ~xor_list() {
@@ -53,6 +53,14 @@ public:
 
 private:
 	iterator _begin,_end;
+	constexpr iterator insert_by_node(const_iterator pos, node *new_node) {
+		if(pos.prev) pos.prev->both = get_xor(pos.prev->both,pos.curr,new_node);
+		if(pos.curr) pos.curr->both = get_xor(pos.curr->both,pos.prev,new_node);
+		new_node->both = get_xor(pos.prev,pos.curr);
+		if(pos==_begin) _begin = iterator(nullptr,new_node);
+		if(pos==_end) _end = iterator(new_node,nullptr);
+		return iterator(pos.prev,new_node);
+	}
 };
 
 #endif
