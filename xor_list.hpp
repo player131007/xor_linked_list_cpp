@@ -5,6 +5,10 @@
 #error "This XOR linked list implementation only supports C++11 and later versions."
 #endif
 
+#if __SIZEOF_POINTER__ != 8
+#warning "This implementation is only tested on 64-bit OSes"
+#endif
+
 #include "xor_list_iter.hpp"
 #include "xor_list_node.hpp"
 
