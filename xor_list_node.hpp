@@ -3,7 +3,6 @@
 
 #include <cstdint>
 #include <utility>
-#include "get_xor.hpp"
 
 template<typename T>
 struct xor_list_node {
