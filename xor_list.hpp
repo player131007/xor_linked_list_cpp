@@ -63,9 +63,9 @@ public:
 private:
 	iterator _begin,_end;
 	constexpr iterator insert_by_node(const_iterator pos, node *new_node) {
-		if(pos.prev) pos.prev->both = get_xor(pos.prev->both,pos.curr,new_node);
-		if(pos.curr) pos.curr->both = get_xor(pos.curr->both,pos.prev,new_node);
-		new_node->both = get_xor(pos.prev,pos.curr);
+		if(pos.prev) pos.prev->both = detail::get_xor(pos.prev->both,pos.curr,new_node);
+		if(pos.curr) pos.curr->both = detail::get_xor(pos.curr->both,pos.prev,new_node);
+		new_node->both = detail::get_xor(pos.prev,pos.curr);
 		if(pos==_begin) _begin = iterator(nullptr,new_node);
 		if(pos==_end) _end = iterator(new_node,nullptr);
 		return iterator(pos.prev,new_node);

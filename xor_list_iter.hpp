@@ -3,10 +3,10 @@
 
 #include "xor_list_node.hpp"
 #include <iterator>
+#include "get_xor.hpp"
 
 
 //TODO: make iterator STL-compatible
-//TODO: make const_iterator
 
 template<typename T>
 class xor_base_iterator {
@@ -40,13 +40,13 @@ public:
 
 	constexpr xor_base_iterator& operator++() {
 		node *tmp = curr;
-		curr = reinterpret_cast<node*>(get_xor(curr->both,prev));
+		curr = reinterpret_cast<node*>(detail::get_xor(curr->both,prev));
 		prev = tmp;
 		return *this;
 	}
 	constexpr xor_base_iterator& operator--() {
 		node *tmp = prev;
-		prev = reinterpret_cast<node*>(get_xor(prev->both, curr));
+		prev = reinterpret_cast<node*>(detail::get_xor(prev->both, curr));
 		curr = tmp;
 		return *this;
 	}
