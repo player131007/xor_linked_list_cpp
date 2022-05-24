@@ -1,6 +1,10 @@
 #ifndef _XOR_LIST_HPP_
 #define _XOR_LIST_HPP_
 
+#if __cplusplus <=201103L
+#error "This XOR linked list implementation only supports C++11 and later versions."
+#endif
+
 #include "xor_list_iter.hpp"
 #include "xor_list_node.hpp"
 

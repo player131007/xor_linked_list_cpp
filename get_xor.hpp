@@ -6,17 +6,17 @@
 
 namespace detail {
 	template<typename T>
-	constexpr uint64_t get_uint64(T val,std::true_type) {
+	constexpr uint64_t get_uint64(T val,[[gnu::unused]] std::true_type is_ptr) {
 		return reinterpret_cast<uint64_t>(val);
 	}
 
 	template<typename T>
-	constexpr uint64_t get_uint64(T val,std::false_type) {
+	constexpr uint64_t get_uint64(T val,[[gnu::unused]] std::false_type is_ptr) {
 		return static_cast<uint64_t>(val);
 	}
 
 	template<typename T>
-	constexpr bool is_numerical = std::is_integral<T>::value || std::is_pointer_v<T>::value;
+	constexpr bool is_numerical = std::is_integral<T>::value || std::is_pointer<T>::value;
 
 #if __cplusplus >= 202002L
 	template<typename T>
