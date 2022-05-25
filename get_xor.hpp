@@ -24,7 +24,7 @@ namespace detail {
 	uintptr_t get_xor() {return 0;}
 
 	template<typename Head,typename ...Tail>
-	std::enable_if<is_numeric<Head>,uintptr_t>::type get_xor(Head head, Tail ...tail) {
+	typename std::enable_if<is_numeric<Head>,uintptr_t>::type get_xor(Head head, Tail ...tail) {
 		return get_uintptr(head,std::is_pointer<Head>()) ^ get_xor(tail...);
 	}
 }
