@@ -88,8 +88,7 @@ public:
 
 	constexpr xor_list_const_iterator() : xor_base_iterator<const T>() {}
 	constexpr xor_list_const_iterator(node* prev,node *curr) : xor_base_iterator<const T>(prev,curr) {}
-	constexpr xor_list_const_iterator(const xor_list_iterator<T> &other) : xor_base_iterator<const T>(other.prev,other.curr) {}
-	constexpr xor_list_const_iterator(const xor_list_const_iterator &other) : xor_base_iterator<const T>(other) {}
+	constexpr xor_list_const_iterator(const xor_base_iterator<T> &other) : xor_base_iterator<const T>(other.prev,other.curr) {}
 	friend constexpr void swap(xor_list_const_iterator &a, xor_list_const_iterator &b) {
 		auto tmp = a;
 		a = b;
