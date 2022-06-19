@@ -54,9 +54,12 @@ public:
 
 
 	constexpr xor_list<T>& reverse() {
-		swap(_begin,_end);
-		swap(_begin.prev, _begin.curr);
-		swap(_end.prev, _end.curr);
+		auto low = begin(), high = rbegin();
+		while(low!=high && low.prev!=high.curr) {
+			std::swap(*low,*high);
+			low++;
+			high++;
+		}
 		return *this;
 	}
 
